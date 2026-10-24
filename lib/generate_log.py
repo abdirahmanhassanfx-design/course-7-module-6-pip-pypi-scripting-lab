@@ -13,3 +13,23 @@ def generate_log(data):
 
     print(f"Log written to {filename}")
     return filename
+
+
+def fetch_data():
+    import requests
+
+    response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+    if response.status_code == 200:
+        return response.json()
+    return {}
+
+
+def main():
+    log_data = ["User logged in", "User updated profile", "Report exported"]
+    generate_log(log_data)
+    post = fetch_data()
+    print("Fetched Post Title:", post.get("title", "No title found"))
+
+
+if __name__ == "__main__":
+    main()
